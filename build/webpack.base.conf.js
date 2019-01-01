@@ -4,10 +4,9 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
-
 
 
 module.exports = {
@@ -39,27 +38,32 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')],
-        exclude: [resolve('src/es5')]
+        exclude: [resolve('src/rawfiles')]
       },
       {
         test: /\.js$/,
-        include: [resolve('src/es5')],
+        include: [resolve('src/rawfiles')],
         use: [
           'raw-loader',
           {
-            loader: resolve('loaders/we-uglify-loader'),
+            loader: resolve('loaders/uglify-loader'),
+            options: {}
+          },
+          {
+            loader: 'babel-loader',
             options: {
-
+              presets: [
+                [
+                  "env",
+                  {
+                    "targets": {
+                      "browsers": ["last 2 versions", "safari >= 7"]
+                    },
+                    forceAllTransforms: true
+                  }]
+              ],
             }
           }
-        ]
-      },
-      {
-        test: /\.scss$/,
-        include: [resolve('src/es5/sass')],
-        use: [
-          'raw-loader',
-          'scss-loader'
         ]
       },
       {

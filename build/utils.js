@@ -3,6 +3,9 @@ const path = require('path')
 const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const packageConfig = require('../package.json')
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
 
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
@@ -76,11 +79,48 @@ exports.styleLoaders = function (options) {
     output.push({
       test: new RegExp('\\.' + extension + '$'),
       use: loader,
-      exclude: [resolve('src/es5')]
+      exclude: [resolve('src/rawfiles')]
     })
   }
 
   return output
+}
+
+exports.rawStyleLoaders = function () {
+  const output = []
+  const loaders = loader => {
+    const loaders = [{
+      loader: 'css-loader',
+      options: {
+        minimize: true
+      }
+    }, 'postcss-loader']
+    if(loader !== 'css') {
+      loaders.push(loader + '-loader')
+    }
+    return loaders
+  }
+  const maps = {
+    css: 'css',
+    less: 'less',
+    sass: 'sass',
+    scss: 'sass',
+    stylus: 'stylus',
+    styl: 'stylus'
+  }
+  for (let key in maps) {
+    if(maps.hasOwnProperty(key)) {
+      const loader = {
+        test: new RegExp('\\.' + key + '$'),
+        include: [resolve('src/rawfiles')],
+        use: loaders(maps[key])
+      }
+      output.push(loader)
+    }
+  }
+  console.log(output)
+  return output
+  
 }
 
 exports.createNotifierCallback = () => {

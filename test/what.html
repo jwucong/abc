@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<h1>what</h1>
+
+<script>
+  
+  "use strict";
+  var _keys = require("babel-runtime/core-js/object/keys"), _keys2 = _interopRequireDefault(_keys);
+  
+  function _interopRequireDefault(n) {
+    return n && n.__esModule ? n : {default: n}
+  }
+  
+  !function (r, n, t) {
+    var e = {
+      is: o, isNumber: u, isString: i, isBoolean: function (n) {
+        return o(n, "Boolean")
+      }, isArray: function (n) {
+        return o(n, "Array")
+      }, isObject: a, isFunction: f, isRegExp: function (n) {
+        return o(n, "RegExp")
+      }, isDate: function (n) {
+        return o(n, "Date")
+      }, isSymbol: function (n) {
+        return o(n, "Symbol")
+      }, isNull: function (n) {
+        return o(n, "Null")
+      }, isUndefined: function (n) {
+        return o(n, "Undefined")
+      }, isNaN: function (n) {
+        return u(n) && n != n
+      }, isWeiXin: function () {
+        var n = r.navigator.userAgent.toLowerCase();
+        return /micromessenger/.test(n)
+      }, isIOS: function () {
+        var n = navigator.userAgent;
+        return /\(i[^;]+;( U;)? CPU.+Mac OS X/i.test(n)
+      }, isAndroid: function () {
+        var n = navigator.userAgent;
+        return /Android/i.test(n)
+      }, toArray: c, toBytes: function (n, r) {
+        r = r || 1024;
+        var t = /^(\d+(?:\.\d+)?)/;
+        if (!t.test(n)) throw new Error("Unresolved: " + n);
+        var e = RegExp.$1, o = n.toString().replace(t, "").trim() || "B",
+          u = ["B", "K", "M", "G", "T", "P", "E", "Z", "Y", "B", "N", "D"].findIndex(function (n, r) {
+            var t = "^" + n + (0 === r ? "(?:yte)" : "b") + "?$", e = new RegExp(t, "i");
+            return e.test(o)
+          });
+        if (-1 !== u) return Math.ceil(e * Math.pow(r, u));
+        throw new Error("Unrecognized unit: " + o)
+      }, extend: s, S2DHMS: function (n) {
+        if (n <= 0) return "00天00时00分00秒";
+        var r = function (n) {
+            return n < 10 ? "0" + n : n + ""
+          }, t = r(Math.floor(n / 3600 / 24)), e = r(Math.floor(n / 3600) % 24), o = r(Math.floor(n / 60) % 60),
+          u = r(Math.floor(n % 60));
+        return [t, "天", e, "时", o, "分", u, "秒"].join("")
+      }, formatDate: function (n, r) {
+        /yyyy|MM|dd|hh|mm|ss/g.test(n) && (r = n, n = void 0);
+        var t = function (n) {
+          return n < 10 ? "0" + n : n + ""
+        }, e = new Date(n || Date.now()), o = {
+          yyyy: e.getFullYear(),
+          MM: t(e.getMonth() + 1),
+          dd: t(e.getDate()),
+          hh: t(e.getHours()),
+          mm: t(e.getMinutes()),
+          ss: t(e.getSeconds())
+        };
+        return r = i(r) ? r : "yyyy-MM-dd hh:mm:ss", (0, _keys2.default)(o).forEach(function (n) {
+          r = r.replace(new RegExp(n, "g"), o[n])
+        }), r
+      }, countdown: function (n) {
+        var r = s({duration: 60, interval: 1, beforeCountdown: null, onCountdown: null, afterCountdown: null}, n),
+          t = r.duration, e = r.beforeCountdown, o = r.onCountdown, u = r.afterCountdown, i = 1e3 * r.interval;
+        f(e) && e(t);
+        var a = setInterval(function () {
+          --t <= 0 ? (clearInterval(a), f(u) && u(t, a)) : f(o) && o(t, a)
+        }, i);
+        return a
+      }, replace: function (n, r, t) {
+        for (var e in t = t || ["{{", "}}"], r) if (r.hasOwnProperty(e)) {
+          var o = new RegExp(t[0] + "\\s*" + e + "\\s*" + t[1], "g");
+          n = n.replace(o, function () {
+            return r[e]
+          })
+        }
+        return n
+      }
+    };
+    
+    function o(n, r) {
+      var t = {}.toString.call(n).replace(/^\[object\s(\w+)\]$/, "$1");
+      return r ? t.toLowerCase() === r.toLowerCase() : t
+    }
+    
+    function u(n) {
+      return o(n, "Number")
+    }
+    
+    function i(n) {
+      return o(n, "String")
+    }
+    
+    function a(n) {
+      return o(n, "Object")
+    }
+    
+    function f(n) {
+      return o(n, "Function")
+    }
+    
+    function s() {
+      var n = c(arguments).filter(function (n) {
+        return a(n)
+      }), r = n.length;
+      if (r <= 0) return {};
+      for (var t = n[0], e = 1; e < r; e++) {
+        var o = n[e];
+        for (var u in o) o.hasOwnProperty(u) && t[u] !== o[u] && (t[u] = o[u])
+      }
+      return t
+    }
+    
+    function c(n) {
+      return [].slice.call(n)
+    }
+    
+    r.utils = e
+  }(window, document, JSON);
+</script>
+
+<script>
+  
+  "use strict";
+  !function (F, K, X, Y) {
+    if (!Q() || V(Y, "Undefined")) return;
+    
+    function Q() {
+      var t = F.navigator.userAgent.toLowerCase();
+      return /micromessenger/.test(t)
+    }
+    
+    function V(t, e) {
+      return {}.toString.call(t).replace(/^\[object\s(\w+)\]$/, "$1") === e
+    }
+    
+    function tt() {
+      return Y(".yi-yuan-gou").hasClass("freeGou")
+    }
+    
+    function et(t) {
+      var e = F.location.search.substr(1).split("&"), i = {};
+      return e.forEach(function (t) {
+        var e = t.split("="), n = e[0], a = e[1];
+        n && (i[n] = void 0 === a ? void 0 : decodeURIComponent(a))
+      }), t ? i[t] : i
+    }
+    
+    function nt(t) {
+      if (t && !ht && !mt) {
+        var e = Y.extend({}, et(), t), n = [];
+        for (var a in e) if (e.hasOwnProperty(a)) {
+          var i = a + "=" + encodeURIComponent(e[a]);
+          n.push(i)
+        }
+        var o = F.location.href, d = o.indexOf("?"), r = (-1 === d ? o : o.slice(0, d)) + "?" + n.join("&");
+        o !== r && (F.location.href = r)
+      }
+    }
+    
+    function at(t) {
+      var e = t.data;
+      return e ? {
+        joinId: e.id,
+        joinCardOpenId: e.cardOpenId,
+        activityId: e.activityId,
+        queryDate: F.utils.formatDate(Date.now(), "yyyy-MM-dd")
+      } : {}
+    }
+    
+    var it = F._um_weixin_sdk,
+      ot = {minimumMember: MIN_HELP_PERSON_NUMBER, goodsNumber: PRODUCT_NUMBER, purchasePrice: ORIGINAL_PRICE},
+      dt = "http://i0.um.tcl.com/icon-wepage-ok2.png", rt = "http://i0.um.tcl.com/icon-wepage-time.png",
+      st = "http://i0.um.tcl.com/icon-wepage-none.png", ct = !1, ut = !1, lt = 1, ft = !1, pt = null, ht = !1, mt = !1,
+      vt = "";
+    Y(function () {
+      var t = Y(K.body), l = Y(".yi-yuan-gou"), d = l.find(".count-down"), n = l.find(".progrees .current"),
+        a = l.find(".progrees .dot"), s = l.find(".avatar img"), c = l.find(".price .others .num"),
+        u = l.find(".product .person"), f = l.find(".product .J_remainedPerson"), p = l.find(".product .money"),
+        h = l.find(".product .J_remainedMoney"), m = l.find(".product .remain-product"),
+        v = l.find(".product .joined-person span"), y = l.find(".days"), g = l.find(".popup"), i = g.find(".mask"),
+        w = g.find(".loading"), C = g.find(".content"), o = g.find(".share"), r = g.find(".icon img"), b = g.find("h3"),
+        I = g.find("p"), k = g.find(".close"), x = g.find(".getvalidate-tbn"), M = l.find(".submit"),
+        D = g.find(".input-box");
+      
+      function O() {
+        var t = et(), e = 0, n = ["joinId", "joinCardOpenId", "activityId"];
+        for (var a in t) t.hasOwnProperty(a) && -1 < n.indexOf(a) && e++;
+        return !(e < n.length) && t.joinCardOpenId !== it.getCardOpenid()
+      }
+      
+      function e(t) {
+        t.preventDefault()
+      }
+      
+      function j() {
+        t.addClass("disabled-scroll"), g.on("touchmove", e), g.show()
+      }
+      
+      function T() {
+        t.removeClass("disabled-scroll"), g.off("touchmove", e), g.hide(), o.hide(), D.each(function (t, e) {
+          Y(e).removeClass("check-fail").find("input").val("")
+        }), l.find(".payment .wechat-pay").remove(), pt && (nt(pt), pt = null)
+      }
+      
+      function _() {
+        ut || (ut = !0, M.addClass("disabled"), it.joinActivity(ot, function (t) {
+          ut = !1, M.removeClass("disabled"), T(), 1 === t.code ? (function () {
+            T();
+            var t = tt() ? "" : "恭喜您，参与成功", e = tt() ? "参与成功，请邀请好友为您助力，<br />获得0元秒杀机会" : "邀请好友为您助力，1元抢购商品";
+            q("http://i0.um.tcl.com/icon-wepage-ok.png", t, e), w.hide(), C.find(".authorize").hide(), C.find(".more-helpers").hide(), C.find(".general").show(), C.find(".tips").show(), C.find(".payment").hide(), C.show(), j()
+          }(), pt = at(t)) : alert(t.msgZ)
+        }, function (t) {
+          ut = !1, M.removeClass("disabled")
+        }))
+      }
+      
+      function U() {
+        var t = {
+          joinId: 0,
+          activityId: it.getActivityIds(),
+          joinCardOpenId: it.getCardOpenid(),
+          queryDate: F.utils.formatDate(vt, "yyyy-MM-dd")
+        };
+        it.getJoinActivity(t, function (t) {
+          1 < t.data.joinStatus ? (ft = !0, A({
+            text: "查看我的参与", handler: function () {
+              nt(at(t))
+            }
+          })) : A({text: "助力成功，我也要参与", handler: _}, t), R()
+        }, function () {
+          R()
+        })
+      }
+      
+      function E() {
+        T(), C.hide(), w.show(), j();
+        var t = et(), e = {
+          joinId: t.joinId || 0,
+          activityId: t.activityId || it.getActivityIds(),
+          joinCardOpenId: t.joinCardOpenId || it.getCardOpenid(),
+          queryDate: F.utils.formatDate(vt, "yyyy-MM-dd")
+        };
+        it.getJoinActivity(e, function (t) {
+          var e = t.data;
+          1 < (lt = e.joinStatus) && nt(at(t)), function (t) {
+            var e = t.accumulativeMoney || 0, n = null === t.countSurplus ? PRODUCT_NUMBER : t.countSurplus,
+              a = null === t.assistanceHeadImgList ? [] : t.assistanceHeadImgList;
+            if (lt = t.joinStatus || 1, c.text("数量: " + n), u.text(t.accumulativeMember || 0), p.text(e), s.attr("src", t.headImgUrl || "http://i0.um.tcl.com/icon-wepage-no-avatar.png"), function (t) {
+                for (var n = "", e = "", a = 0; a < 5; a++) e += '<div class="avatar-item"><img src="' + (void 0 === t[a] ? "http://i0.um.tcl.com/icon-wepage-wenhao.png" : t[a].headImgUrl) + '"><span>' + (void 0 === t[a] ? "" : t[a].nickname) + "</span></div>";
+                var i = t.length < 5 ? "disabled" : "";
+                l.find(".more-avatar").html(e).append('<div class="avatar-item J_showMore ' + i + '"><img src="http://i0.um.tcl.com/icon-wepage-gengduo.png"></div>'), t.map(function (t, e) {
+                  n += '<div class="avatar-item"><img src="' + t.headImgUrl + '" /><span>' + t.nickname + "</span></div>"
+                }), g.find(".avatar-box").html(n), l.find(".J_showMore").on("click", function () {
+                  T(), w.hide(), g.find(".tips").hide(), g.find(".payment").hide(), Y(this).hasClass("disabled") || (l.find(".more-helpers").show(), C.show(), g.show())
+                })
+              }(a), tt()) {
+              var i = null === t.progressData ? 0 : t.progressData.surplusAssistanceNumber,
+                o = null === t.progressData ? 0 : t.progressData.surplusAssistanceMoney,
+                d = null === t.progressData ? 0 : t.progressData.totalJoinNumber,
+                r = null === t.progressData ? 0 : t.progressData.surplusGoodsNumber;
+              f.text(i), h.text(o), v.text(d), m.text(r), S(100 * (PRODUCT_NUMBER - r))
+            } else S(e / (ORIGINAL_PRICE - 1) * 100)
+          }(e), O() ? U() : A(lt, t), R(), T()
+        }, function (t) {
+        })
+      }
+      
+      function R() {
+        ht ? (M.off("click").text("活动已失效").addClass("disabled"), invalidWatermark.show(), unstartWatermark.hide()) : mt ? (M.off("click").text("活动未开始").addClass("disabled"), unstartWatermark.show(), invalidWatermark.hide()) : (invalidWatermark.hide(), unstartWatermark.hide())
+      }
+      
+      function S(t) {
+        t <= 0 && (t = 0), 100 <= t && (t = 100);
+        var e = t + "%";
+        n.width(e), a.css("left", e)
+      }
+      
+      function A(t, e) {
+        var n = V(e, "Object") && e.data || {}, a = V(n.countSurplus, "Null") ? PRODUCT_NUMBER : n.countSurplus,
+          i = PRODUCT_NUMBER <= 0 || a <= 0, o = "我要参与", d = null;
+        V(t, "Object") ? (o = t.text, d = t.handler) : 1 == t ? (o = tt() ? "立即参与" : "我要参与", d = _) : 2 == t ? (o = "邀请好友助力", d = N) : 3 == t && (o = tt() ? "提交表单" : "1元购买", d = W), i && (d = J), L() && (d = P), 4 != t && 5 != t || (o = tt() ? "参与成功" : "已购买", d = null), M.text(o).removeClass("disabled"), M.off("click"), V(d, "Function") && M.on("click", d)
+      }
+      
+      function N() {
+        T(), w.hide(), C.hide(), o.show(), j()
+      }
+      
+      function P() {
+        T(), q(rt, "亲，活动已经结束哦", "持续关注TCL，可参与更多活动"), r.attr("src", rt), w.hide(), C.find(".authorize").hide(), C.find(".more-helpers").hide(), C.find(".general").show(), C.find(".tips").show(), C.find(".payment").hide(), C.show(), j()
+      }
+      
+      function J() {
+        T();
+        var t = tt() ? "您可以在次日0点持续参与活动" : "持续关注TCL，可参与更多活动";
+        q(st, "十分遗憾，商品已抢完", t), r.attr("src", st), w.hide(), C.find(".authorize").hide(), C.find(".more-helpers").hide(), C.find(".general").show(), C.find(".tips").show(), C.find(".payment").hide(), C.show(), j()
+      }
+      
+      function q(t, e, n) {
+        r.attr("src", t), b.text(e), I.html(n)
+      }
+      
+      function L() {
+        return it.getActivityEndTime() <= Math.floor((new Date).getTime() / 1e3)
+      }
+      
+      function W() {
+        if (L()) P(); else {
+          var t = et();
+          it.getJoinActivity(t, function (t) {
+            var e = t.data || {}, n = tt() ? e.progressData.surplusGoodsNumber : e.countSurplus;
+            1 == t.code ? 0 < n ? function () {
+              T();
+              var t = tt() ? Y('<div class="wechat-pay">提交</div>') : Y('<div class="wechat-pay">微信支付</div>');
+              t.off("click").on("click", B), l.find(".payment").append(t), w.hide(), o.hide(), C.find(".tips").hide(), C.find(".more-helpers").hide(), C.find(".payment").show(), C.show(), j()
+            }() : J() : alert(t.msgZ)
+          }, function () {
+          })
+        }
+      }
+      
+      function B() {
+        var t, e, n, a = l.find(".payment .wechat-pay");
+        if (!(ct || a.hasClass("disabled") || (t = Z(D.eq(0)), e = $(D.eq(1)), n = z(D.eq(2)), !(t && e && n)))) {
+          ct = !0, a.addClass("disabled");
+          var i = tt() ? Y("#formSubmitUrl").val() : Y("#paySubmitUrl").val(), o = {
+            pageId: null,
+            formId: 10,
+            data: [{name: "姓名", type: "text", value: G(D.eq(0))}, {
+              name: "手机号码",
+              type: "text",
+              tip: "tel",
+              value: G(D.eq(1))
+            }, {name: "手机验证码", type: "text", tip: "vCode", value: G(D.eq(2))}]
+          };
+          Y.ajax({
+            url: i,
+            type: "POST",
+            data: X.stringify(o),
+            contentType: "application/json",
+            dataType: "json",
+            cache: !1,
+            success: function (t) {
+              if (1 == t.code) if (tt()) E(), T(), q(dt, "", "提交成功，内容卡的账号密码将通过<br />短信方式发送到您的手机"), r.attr("src", dt), w.hide(), C.find(".authorize").hide(), C.find(".more-helpers").hide(), C.find(".general").show(), C.find(".tips").show(), C.find(".payment").hide(), C.show(), j(); else {
+                var e = it.getChannel(), n = G(D.eq(1));
+                it.pay(100, "一元抢好物", e, n)
+              } else alert(t.msgZ)
+            },
+            error: function (t) {
+            },
+            complete: function () {
+              ct = !1, a.removeClass("disabled"), tt() || (T(), E())
+            }
+          })
+        }
+      }
+      
+      function G(t) {
+        return t.find("input").val()
+      }
+      
+      function Z(t) {
+        return !!G(t) || (t.addClass("check-fail").find(".check-form").text("请输入名字"), !1)
+      }
+      
+      function $(t) {
+        var e = G(t), n = t.find(".check-form");
+        return e ? !!/^1[0-9]{10}$/.test(e) || (n.text("请输入正确的手机号码"), t.addClass("check-fail"), !1) : (n.text("请输入手机号码"), t.addClass("check-fail"), !1)
+      }
+      
+      function z(t) {
+        return !!G(t) || (t.addClass("check-fail").find(".check-form").text("请输入验证码"), !1)
+      }
+      
+      function H() {
+        var t = Y(this).hasClass("disabled"), e = D.eq(1), n = $(e);
+        if (!t && n) {
+          var a = {mobile: G(e), captcheCode: "", captchaKey: ""};
+          Y.ajax({
+            url: "/cloud/sms/sms/validCodeSend",
+            type: "GET",
+            dataType: "json",
+            data: a,
+            timeout: 6e3,
+            success: function (t) {
+              alert(1 == t.code ? "验证码发送成功" : t.msgZ)
+            },
+            error: function () {
+            }
+          }), function (t) {
+            x.addClass("disabled"), x.text("重新获取(" + t + "s)");
+            var e = setInterval(function () {
+              --t < 0 ? (clearInterval(e), x.text("获取验证码"), x.removeClass("disabled")) : x.text("重新获取(" + t + "s)")
+            }, 1e3)
+          }(59)
+        }
+      }
+      
+      invalidWatermark = l.find(".watermark-invalid"), unstartWatermark = l.find(".watermark-unstart"), function () {
+        it.onPaySuccess = function () {
+          E()
+        }, k.add(i).add(o).on("click", T), x.on("click", H), tt() ? function (t, e) {
+          for (var n = Math.round((e - t) / 864e5) + 1, a = "", i = (new Date).getMonth() + 1, o = (new Date).getDate(), d = 0; d < n; d++) {
+            var r = t + 24 * d * 60 * 60 * 1e3, s = Math.round(new Date(r).getMonth()) + 1,
+              c = Math.round(new Date(r).getDate());
+            i < s ? a += '<div class="day-item J_invalid" data-date="' + r + '">' + s + "月" + c + "日 <br /><span>已失效</span> </div>" : s === i ? a += o < c ? '<div class="day-item J_unstart" data-date="' + r + '">' + s + "月" + c + "日 <br /><span>00:00开启</span> </div>" : c === o ? '<div class="day-item cur-day" data-date="' + r + '">' + s + "月" + c + "日 <br /><span>正在抢购</span> </div>" : '<div class="day-item J_invalid" data-date="' + r + '">' + s + "月" + c + "日 <br /><span>已失效</span> </div>" : s < i && (a += '<div class="day-item J_unstart" data-date="' + r + '">' + s + "月" + c + "日 <br /><span>00:00开启</span> </div>")
+          }
+          y.html(a);
+          var u = y.find(".cur-day");
+          u.offset().left && y.scrollLeft(u.offset().left - 10);
+          y.find(".day-item").on("click", function () {
+            Y(this).addClass("cur-day").siblings(".day-item").removeClass("cur-day"), Y(this).hasClass("J_unstart") ? mt = !(ht = !1) : Y(this).hasClass("J_invalid") ? (ht = !(mt = !1), lt < 3 && l.find(".fail-tips").show()) : (ht = mt = !1, l.find(".fail-tips").hide()), vt = Y(this).data("date"), E()
+          })
+        }(1e3 * it.getActivityStartTime(), 1e3 * it.getActivityEndTime()) : function (i) {
+          if (!i) return;
+          var o = setInterval(function () {
+            var t = Math.floor((new Date).getTime() / 1e3), e = i - t;
+            if (e < 0) clearInterval(o); else {
+              var n = function (t) {
+                if (t <= 0) return "00天00时00分00秒";
+                var e = function (t) {
+                  return t < 10 ? "0" + t : t
+                };
+                return [e(Math.floor(t / 3600 / 24)), "天", e(Math.floor(t / 3600) % 24), "时", e(Math.floor(t / 60) % 60), "分", e(Math.floor(t % 60)), "秒"].join("")
+              }(e).split(""), a = n.map(function (t) {
+                var e = /\d/.test(t);
+                return e ? '<span class="time">' + t + "</span>" : "<span>" + t + "</span>"
+              }).join("");
+              d.html(a)
+            }
+          }, 1e3)
+        }(it.getActivityEndTime());
+        D.each(function (t, e) {
+          var n = Y(e), a = n.find("input"), i = [Z, $, z];
+          a.on("focus", function () {
+            n.removeClass("check-fail")
+          }), a.on("blur", function () {
+            i[t](n)
+          })
+        }), E(), O() && (t = et(), it.assistanceActivity(t, function (t) {
+          1 == t.code ? (E(), !ft && A({text: "助力成功，我也要参与", handler: _}, t)) : alert(t.msgZ)
+        }, function (t) {
+        }), U());
+        var t;
+        L() && P();
+        Q() && (a = navigator.userAgent, /\(i[^;]+;( U;)? CPU.+Mac OS X/i.test(a)) && (n = 0, K.body.addEventListener("focusin", function () {
+          n = K.documentElement.scrollTop || F.pageYOffset || K.body.scrollTop, clearTimeout(e)
+        }, !1), K.body.addEventListener("focusout", function () {
+          clearTimeout(e), e = setTimeout(function () {
+            F.scrollTo({top: n, behavior: "smooth"})
+          }, 300)
+        }, !1));
+        var e, n;
+        var a
+      }()
+    })
+  }(window, document, JSON, "undefined" == typeof $ ? void 0 : $);
+
+</script>
+
+
+
+</body>
+</html>

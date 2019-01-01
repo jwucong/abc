@@ -1,0 +1,16 @@
+
+.hello {
+  width: 100px;
+  height: 100px;
+  background: #fff;
+  .fine {
+    position: relative;
+    z-index: 10;
+  }
+}
+
+.hi {
+  font-style: italic;
+  font-size: 16px;
+  color: #000;
+}
